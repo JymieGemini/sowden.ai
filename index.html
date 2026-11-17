@@ -43,8 +43,9 @@
   .what { font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 200; color: #d8d8d8; margin-bottom: 32px; padding-left: 0.3em; }
   .who { font-size: 1rem; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.03em; }
   .ai { font-size: 1rem; color: var(--muted); margin-bottom: 44px; letter-spacing: 0.03em; }
-  a { color: var(--ink); text-decoration: none; letter-spacing: 0.12em; font-weight: 300; border-bottom: 1px solid #444; padding-bottom: 2px; }
-  a:hover { border-color: var(--ink); }
+  .email { font: inherit; color: var(--ink); background: none; border: 0; border-bottom: 1px solid #444; padding: 0 0 2px; cursor: pointer; letter-spacing: 0.12em; font-weight: 300; }
+  .email:hover { border-color: var(--ink); }
+  .note { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 14px; min-height: 1.2em; }
   @media (max-width: 480px) { .what { font-size: 0.85rem; letter-spacing: 0.2em; } .logo { margin-bottom: 40px; } }
 </style>
 </head>
@@ -55,7 +56,16 @@
   <p class="who">Ex Chief Strategy Officer, TBWA\Chiat\Day New York. Ex Head of Strategy, BBH Asia Pacific.</p>
   <p class="who">Hilton, LG, IKEA, Nike, Carnival Cruise Line, Johnnie Walker, Axe, Coca Cola, Singtel, KFC, Pizza Hut.</p>
   <p class="ai">25+ years of strategy. One year inside AI.</p>
-  <p><a href="mailto:james@sowden.ai">james@sowden.ai</a></p>
+  <p><button class="email" type="button" id="copy" aria-label="Copy email address">james@sowden.ai</button></p>
+  <p class="note" id="note" aria-live="polite">&nbsp;</p>
 </main>
+<script>
+  const btn = document.getElementById('copy'), note = document.getElementById('note');
+  btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('james@sowden.ai'); note.textContent = 'Copied'; }
+    catch (e) { note.textContent = 'james@sowden.ai'; }
+    setTimeout(() => { note.innerHTML = '&nbsp;'; }, 1800);
+  });
+</script>
 </body>
 </html>
